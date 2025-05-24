@@ -13,14 +13,15 @@ export class UserRepositoryMysql implements UserRepository {
   ) {}
 
   async create(user: User): Promise<User> {
-    await this.userRepository.save(user);
+    const entity = UserMapper.toPersistence(user);
+    const newUser = await this.userRepository.save(entity);
 
-    return user;
+    return UserMapper.toDomain(newUser);
   }
 
   async findAll(): Promise<User[]> {
     const users = await this.userRepository.find();
 
-    return users.map((userEntity) => UserMapper.toDto(userEntity));
+    return users.map((userEntity) => UserMapper.toDomain(userEntity));
   }
 }

@@ -1,11 +1,12 @@
 import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
+
 import { FindAllUsersUseCase } from 'src/modules/user/use-cases/find-all-users.use-case';
 import UseCaseKeysModel from 'src/shared/usecase/use-case-keys';
 import UseCaseProxy from 'src/shared/usecase/use-case-proxy';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { CreateUserUseCase } from 'src/modules/user/use-cases/create-user-use-case';
-import { User } from 'src/modules/user/entities/user';
+import { CreateUserInput } from 'src/modules/user/dto/create-user-input';
 
 @ApiTags('Users')
 @Controller('users')
@@ -31,10 +32,19 @@ export class UserController {
     type: CreateUserDto,
   })
   async create(@Body() user: CreateUserDto) {
+    const input = new CreateUserInput(
+      user.name,
+      user.lastName ?? '',
+      user.email,
+      user.password,
+      user.gender,
+    );
+
     try {
       const createdUser = await this.createUserUseCase
         .getInstance()
-        .execute(user as User);
+        .execute(input);
+
       return createdUser;
     } catch (error) {
       console.log(error);
