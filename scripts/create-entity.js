@@ -10,7 +10,7 @@ if (args.length < 2) {
 const [moduleName, entityName] = args;
 const modulePath = path.join(__dirname, '../src/modules', moduleName.toLowerCase());
 const entityPath = path.join(modulePath, 'entities');
-const repositoryPath = path.join(modulePath, 'repositories');
+const repositoryPath = path.join(modulePath, 'infrastructure', 'database');
 const interfacePath = path.join(modulePath, 'repositories');
 const moduleInfrastructurePath = path.join(modulePath, 'infrastructure', 'database', 'entities');
 
@@ -58,13 +58,20 @@ const interfaceTemplate = `export interface ${entityName}Repository {
 `;
 
 const updatedRepositoryTemplate = `import { Repository } from 'typeorm';
-import { ${entityName} } from '../infrastructure/database/entities/${entityName.toLowerCase()}.entity';
-import { ${entityName}Repository } from './${entityName.toLowerCase()}.repository';
+import { InjectRepository } from '@nestjs/typeorm';
 
-export class ${entityName}RepositoryMysql extends Repository<${entityName}> implements ${entityName}Repository {
+import { ${entityName} } from './entities/${entityName.toLowerCase()}.entity';
+import { ${entityName}Repository } from '../../repositories/${entityName.toLowerCase()}.repository';
+
+export class ${entityName}RepositoryMysql implements ${entityName}Repository {
+  constructor(
+    @InjectRepository(${entityName}Entity)
+    private readonly userRepository: Repository<${entityName}Entity>,
+  ) {}
+
   // Implement repository methods here
   async findAll(): Promise<${entityName}[]> {
-    return this.find();
+    return this.userRepository.find();
   }
 }
 `;

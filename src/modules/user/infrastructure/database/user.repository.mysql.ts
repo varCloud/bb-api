@@ -1,9 +1,10 @@
 import { Repository } from 'typeorm';
-import { UserEntity } from '../infrastructure/database/entities/user.entity';
-import { UserRepository } from './user.repository';
-import { User } from '../entities/user';
-import { UserMapper } from '../mappers/user.mapper';
 import { InjectRepository } from '@nestjs/typeorm';
+
+import { UserEntity } from './entities/user.entity';
+import { UserRepository } from '../../repositories/user.repository';
+import { User } from '../../entities/user';
+import { UserMapper } from '../../mappers/user.mapper';
 
 export class UserRepositoryMysql implements UserRepository {
   constructor(

@@ -15,4 +15,19 @@ export class UserEntity {
   @Column({ unique: true })
   @IsEmail()
   email: string;
+
+  @Column()
+  password: string;
+
+  @Column()
+  gender: string;
+
+  @Column({ name: 'is_deleted', default: false })
+  isDeleted: boolean;
+
+  @Column({ name: 'created_at', default: 'now()' })
+  createdAt: Date;
+
+  @Column({ name: 'updated_at', default: 'now()' })
+  updatedAt: Date;
 }

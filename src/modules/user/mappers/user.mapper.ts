@@ -8,6 +8,8 @@ export class UserMapper {
       name: entity.name,
       email: entity.email,
       lastName: entity.lastName,
+      gender: entity.gender,
+      password: entity.password,
     };
   }
 }
