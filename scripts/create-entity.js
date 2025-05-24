@@ -42,7 +42,7 @@ const interfaceFileName = `${entityName.toLowerCase()}.repository.ts`;
 const entityTemplate = `import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity('${entityName.toLowerCase()}s')
-export class ${entityName} {
+export class ${entityName}Entity {
   @PrimaryGeneratedColumn()
   id: number;
 
