@@ -58,8 +58,20 @@ pnpm run migration:revert
 
 ### Scripts personalizados
 ```bash
+# Crear un modulo completo
+node scripts/create-module.js <modulaname>
 # Crear una nueva entidad
 pnpm run create-entity
+```
+
+#### Ejemplo de uso del script `create-entity`
+El script `create-module` sigue las siguientes convenciones:
+- El nombre del módulo debe estar en **minúsculas**.
+
+Este script creará todas las carpetas necesarias en api y en modules.
+
+```bash
+node scripts/create-module.js product
 ```
 
 #### Ejemplo de uso del script `create-entity`
