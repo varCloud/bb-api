@@ -11,6 +11,12 @@ export class UserRepositoryMysql implements UserRepository {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
+  async create(user: User): Promise<User> {
+    await this.userRepository.save(user);
+
+    return user;
+  }
+
   async findAll(): Promise<User[]> {
     const users = await this.userRepository.find();
 

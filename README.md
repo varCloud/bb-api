@@ -1,98 +1,83 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+## API REST Gym App
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+### Requerimientos:
+- Node.js v20.x.x
+- MySQL
+- TypeORM
+- NestJS
+- Swagger
+- Docker
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Available Scripts
 
-## Description
+A continuación, se detallan los scripts disponibles en el proyecto:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
+### Instalación de dependencias
 ```bash
-$ pnpm install
+pnpm install
 ```
 
-## Compile and run the project
-
+### Compilación y ejecución
 ```bash
-# development
-$ pnpm run start
+# Modo desarrollo
+pnpm run start
 
-# watch mode
-$ pnpm run start:dev
+# Modo watch (desarrollo continuo)
+pnpm run start:dev
 
-# production mode
-$ pnpm run start:prod
+# Modo producción
+pnpm run start:prod
 ```
 
-## Run tests
-
+### Pruebas
 ```bash
-# unit tests
-$ pnpm run test
+# Pruebas unitarias
+pnpm run test
 
-# e2e tests
-$ pnpm run test:e2e
+# Pruebas de integración (e2e)
+pnpm run test:e2e
 
-# test coverage
-$ pnpm run test:cov
+# Cobertura de pruebas
+pnpm run test:cov
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+### Migraciones
 ```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
+#Levantar la base de datos
+pnpm run start:db
+
+# Crear una nueva migración
+pnpm run migration:generate --name NombreDeLaMigracion
+
+# Ejecutar migraciones
+pnpm run migration:run
+
+# Revertir la última migración
+pnpm run migration:revert
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### Scripts personalizados
+```bash
+# Crear una nueva entidad
+pnpm run create-entity
+```
 
-## Resources
+#### Ejemplo de uso del script `create-entity`
 
-Check out a few resources that may come in handy when working with NestJS:
+El script `create-entity` sigue las siguientes convenciones:
+- El nombre del módulo debe estar en **minúsculas**.
+- El nombre de la entidad debe estar en **singular** y comenzar con una **letra mayúscula**.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Ejemplo:
+```bash
+pnpm run create-entity user Car
+```
+En este caso, se creará una entidad llamada `Car` dentro del módulo `user`.
 
-## Support
+## Estructura del Proyecto
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Para más detalles sobre la estructura del proyecto, consulta el archivo [STRUCTURE.md](./STRUCTURE.md).
 
-## Stay in touch
+## Convenciones de Nombres
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Este proyecto sigue convenciones estrictas de nombres para mantener la consistencia. Consulta el archivo [NAMING-CONVENTIONS.md](./NAMING-CONVENTIONS.md) para más información.

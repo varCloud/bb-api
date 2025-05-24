@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import { ConfigModule } from '@nestjs/config';
 import { DataSource } from 'typeorm';
+import { SnakeNamingStrategy } from './snake-naming.strategy';
 
 ConfigModule.forRoot().catch((err) =>
   console.error('error loading config', err),
@@ -18,4 +19,5 @@ export const AppDataSource = new DataSource({
   entities: ['../../modules/**/*.entity{.ts,.js}'],
   migrations: ['src/infrastructure/database/typeorm/migrations/*.ts'],
   migrationsTableName: 'migrations',
+  namingStrategy: new SnakeNamingStrategy(),
 });
