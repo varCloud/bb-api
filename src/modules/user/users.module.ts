@@ -7,24 +7,29 @@ import UseCaseKeysModel from 'src/shared/usecase/use-case-keys';
 import UseCaseProxy from 'src/shared/usecase/use-case-proxy';
 import { FindAllUsersUseCase } from './use-cases/find-all-users.use-case';
 import { CreateUserUseCase } from './use-cases/create-user-use-case';
+import PasswordService from 'src/shared/services/password.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],
   controllers: [UserController],
   providers: [
     {
-      inject: [UserRepositoryMysql],
+      inject: [UserRepositoryMysql, PasswordService],
       provide: UseCaseKeysModel.GET_USERS,
       useFactory: (userRepository: UserRepositoryMysql) =>
         new UseCaseProxy(new FindAllUsersUseCase(userRepository)),
     },
     {
-      inject: [UserRepositoryMysql],
+      inject: [UserRepositoryMysql, PasswordService],
       provide: UseCaseKeysModel.CREATE_USER,
-      useFactory: (userRepository: UserRepositoryMysql) =>
-        new UseCaseProxy(new CreateUserUseCase(userRepository)),
+      useFactory: (
+        userRepository: UserRepositoryMysql,
+        paswordService: PasswordService,
+      ) =>
+        new UseCaseProxy(new CreateUserUseCase(userRepository, paswordService)),
     },
     UserRepositoryMysql,
+    PasswordService,
   ],
 })
 export class UsersModule {}
